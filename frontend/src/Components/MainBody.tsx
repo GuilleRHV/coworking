@@ -8,7 +8,7 @@ const MainBody: React.FC = () => {
 
   return (
     <>
-      <img src=""></img>
+      <img src="/coworking.jpeg"></img>
     </>
   );
 };
