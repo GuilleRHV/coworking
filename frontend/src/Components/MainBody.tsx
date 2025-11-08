@@ -1,5 +1,4 @@
 import React from "react";
-
 const MainBody: React.FC = () => {
 
   return (
