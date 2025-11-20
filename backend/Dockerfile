@@ -1,38 +1,23 @@
-# Usa una imagen base de PHP 8.1
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
-# Instala las dependencias necesarias
+# Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    nginx \
-    git \
-    curl \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libxml2-dev \
-    zip \
-    libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql zip \
-    && apt-get clean
+    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 
-# Instalar Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Instala Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Establece el directorio de trabajo en /var/www
-WORKDIR /var/www
+# Establece el directorio de trabajo
+WORKDIR /var/www/html
 
-# Copia los archivos de tu aplicación Laravel al contenedor
-COPY . /var/www
+# Copia los archivos del proyecto
+COPY . .
 
-# Instala las dependencias de Laravel usando Composer
-RUN composer install --no-dev --optimize-autoloader
+# Instala las dependencias de Laravel
+RUN composer install --no-interaction
 
-# Exponemos el puerto 80 para Nginx
-EXPOSE 80
+# Permisos para Laravel
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Copia el archivo de configuración de Nginx al contenedor
-COPY ./nginx/default.conf /etc/nginx/sites-available/default
-
-# Arranca Nginx y PHP-FPM
-CMD service nginx start && php-fpm
+CMD ["php-fpm"]
