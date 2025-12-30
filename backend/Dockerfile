@@ -1,37 +1,21 @@
-# Usamos la imagen base de PHP con FPM
-FROM php:8.2-fpm
+FROM richarvey/nginx-php-fpm:latest
 
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
-    nginx \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Instalar Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Establece el directorio de trabajo
-WORKDIR /var/www/html
-
-# Copia los archivos del proyecto al contenedor
 COPY . .
 
-# Instalar las dependencias de Laravel
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-# Configurar los permisos para las carpetas de Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Laravel config
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
 
-# Copiar la configuración de Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copiar el script de inicio
-COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Exponer el puerto 80 para HTTP
-EXPOSE 80
-
-# Comando final para iniciar tanto Nginx como PHP-FPM
-CMD ["start.sh"]
+CMD ["/start.sh"]
