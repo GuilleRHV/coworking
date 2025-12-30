@@ -1,10 +1,12 @@
-//import React, { useState, useEffect } from "react";
+import React, { useState
+  //, useEffect 
+} from "react";
 
 const MainNavbar: React.FC = () => {
-  /*const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };*/
+  };
 //borrar luego
   //const [error, setError] = useState(null);
   //const [isLoaded, setIsLoaded] = useState(false);
