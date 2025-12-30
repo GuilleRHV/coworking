@@ -14,4 +14,4 @@ Route::get('/prueba', function () {
         'timestamp' => now(),
     ];
 });
-Route::get('/rooms', [App\Http\Controllers\Api\RoomController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/rooms', [App\Http\Controllers\Api\RoomController::class, 'index']);
