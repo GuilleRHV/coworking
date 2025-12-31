@@ -15,13 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Middleware de CORS
-        $middleware->prepend(HandleCors::class);
+       /* $middleware->prepend(HandleCors::class);
 
         // Middleware para las rutas API
         $middleware->group('api', [
             'cors',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ]);
+        ]);*/
     
     })
     ->withExceptions(function (Exceptions $exceptions): void {
