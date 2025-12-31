@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/prueba', function () {
     return [
         'status' => 'ok',
-        'mensaje' => 'API funcionando correctamente',
+        'mensaje' => 'API funcionando correctamente, 3 rev',
         'timestamp' => now(),
     ];
 });
