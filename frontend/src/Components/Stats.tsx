@@ -4,9 +4,9 @@ import "../App.css";
 
 
 function Stats() {
-  const machinesRef = useRef(null);
-  const clientsRef = useRef(null);
-  const spacesRef = useRef(null);
+  const machinesRef = useRef('');
+  const clientsRef = useRef('');
+  const spacesRef = useRef('');
 
   useEffect(() => {
     const countMachinesUp = new CountUp(machinesRef.current, 120, {
