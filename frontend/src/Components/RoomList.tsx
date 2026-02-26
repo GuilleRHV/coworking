@@ -18,7 +18,7 @@ function RoomList() {
 
   return (
     <div className="rooms-container">
-    <h1>Espacios</h1>
+    <h4>Espacios</h4>
 
         <div className="rooms-grid">
             {rooms.map((room: any) => (

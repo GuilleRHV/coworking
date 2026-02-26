@@ -1,9 +1,10 @@
 import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 import MainNavbar from './Components/MainNavbar'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import RoomList from "./Components/RoomList";
-
+import Stats from "./Components/Stats";
 function App() {
   return (
     <div className="flex flex-col min-h-screen"> {/* Establecemos flexbox y altura mínima */}
@@ -15,6 +16,7 @@ function App() {
           {/* Otros routes */}
         </Routes>
       </Router>
+      <Stats />
       <RoomList />
       <footer className="bg-gray-800 text-white text-center py-4 mt-auto"> {/* mt-auto empuja el pie al final */}
         <p>
