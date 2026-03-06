@@ -42,7 +42,7 @@ const MainNavbar: React.FC = () => {
       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <img src="/src/images/zgz-coworking.png" className="mr-3 h-6 sm:h-20" alt="Logo coworking" />
+            <img src="/zgz-coworking.png" className="mr-3 h-6 sm:h-20" alt="Logo coworking" />
             <div className="flex items-center lg:order-2"> 
 
               <a className="no-underline group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-neutral-950 px-6 font-medium text-neutral-200 transition hover:scale-110">
